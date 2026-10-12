@@ -4,7 +4,9 @@
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git branch:*)",
+      "Bash(scripts/vscode-open.sh)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
@@ -18,9 +20,16 @@
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-dangerous.sh" }
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-dangerous.sh"
+          }
         ]
       }
     ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   }
 }
