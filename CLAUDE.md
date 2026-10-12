@@ -9,7 +9,7 @@ Dépôt de configuration Claude Code : instructions, permissions, hooks, agents,
 
 ## Conventions
 - Noms de fichiers et dossiers : kebab-case, minuscules, sans accents.
-- Commits courts, à l'impératif (ex. `Ajoute le hook de formatage`).
+- Commits : voir la section « Git ».
 - Ne jamais committer de clés API, tokens ou chemins personnels sensibles.
 
 ## Règles de travail (priorité haute)
@@ -24,9 +24,49 @@ Dépôt de configuration Claude Code : instructions, permissions, hooks, agents,
 ## Initiative
 - Ne prends aucune initiative : fais uniquement ce que je demande, quand je le demande. Pas d'extras, de refactos ou de fichiers non demandés ; propose en une ligne et attends mon accord.
 
+## Cycle de travail d'une fonctionnalité
+1. **Réflexion d'abord** : on discute de toute la fonctionnalité par questions/réponses, avant d'écrire du code.
+2. **Plan d'attaque** : étapes courtes, validées par moi.
+3. **Une étape = un commit.** On avance étape par étape.
+4. **Fin** : on merge dans `main`, puis on recommence pour la fonctionnalité suivante.
+Une branche par fonctionnalité ; jamais de code directement sur `main` (toujours jouable).
+
 ## Git
-- Ne lance jamais `git commit`, `git push` ou `git add` sans ma bénédiction explicite pour cette action précise.
+- Ne lance jamais `git commit`, `git push`, `git add` ni `git merge` sans ma bénédiction explicite pour cette action précise.
 - Par défaut, donne uniquement le titre du commit (une ligne, sans corps de message) ; c'est l'utilisateur qui commit.
+
+### Branches
+| Préfixe | Usage | Exemple |
+|---|---|---|
+| `main` | Toujours jouable, on n'y code jamais directement | |
+| `feature/<nom>` | Une fonctionnalité | `feature/deplacement-joueur` |
+| `fix/<nom>` | Correction d'un bug | `fix/collision-miroir` |
+| `assets/<nom>` | Sprites, sons, maps | `assets/sprites-monde-3` |
+| `refactor/<nom>` | Réorganiser sans changer le comportement | `refactor/constantes` |
+| `docs/<nom>` | Documentation, GDD, journal, conventions | `docs/audit-conventions` |
+
+### Commits
+Format : `type: Message en français` (type collé au `:`, pas d'espace avant, un espace après).
+
+| Type | Usage | Exemple |
+|---|---|---|
+| `feat` | Nouvelle fonctionnalité | `feat: Ajoute la téléportation par les miroirs` |
+| `fix` | Correction d'un bug (quelque chose était cassé) | `fix: Corrige le joueur bloqué dans les murs` |
+| `assets` | Sprites, sons, maps | `assets: Ajoute les sprites du joueur 1` |
+| `docs` | Documentation, GDD, journal | `docs: Met à jour le journal du jour` |
+| `refactor` | Réorganiser sans changer le comportement | `refactor: Déplace les touches dans InputManager` |
+| `style` | Mise en forme uniquement | `style: Corrige l'indentation de HubScene` |
+| `chore` | Configuration, outillage | `chore: Ajoute la config VS Code` |
+
+- Le type correspond au préfixe de la branche : `feature/` → `feat:`, `fix/` → `fix:`, `assets/` → `assets:`, `refactor/` → `refactor:`, `docs/` → `docs:`.
+- `fix` sert uniquement à corriger un bug ; ajouter du nouveau, c'est `feat`.
+- Un commit = une idée, message précis (jamais « modifs » ou « fix »).
+
+## Conventions de code (projets JS / Phaser)
+- Classes (scènes, entités) : `PascalCase.js` (`GameScene.js`). Autres fichiers JS : `camelCase.js`. Dossiers : minuscules.
+- Assets : `snake_case`, sans espaces, accents ni majuscules (`player_1_idle.png`).
+- Classes `PascalCase`, variables/fonctions `camelCase`, constantes `MAJUSCULES_SNAKE`, fichiers de scène suffixés `Scene`.
+- Code en anglais ; commentaires et commits en français.
 
 ## Commandes
 <!-- À compléter selon le projet : build, test, lint -->
